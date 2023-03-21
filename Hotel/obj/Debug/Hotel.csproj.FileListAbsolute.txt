@@ -1,0 +1,12 @@
+F:\C#\Курсовая работа\Hotel\Hotel\bin\Debug\Hotel.exe.config
+F:\C#\Курсовая работа\Hotel\Hotel\bin\Debug\Hotel.exe
+F:\C#\Курсовая работа\Hotel\Hotel\bin\Debug\Hotel.pdb
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.csproj.AssemblyReference.cache
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.csproj.SuggestedBindingRedirects.cache
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.Form1.resources
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.Properties.Resources.resources
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.csproj.GenerateResource.cache
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.csproj.CoreCompileInputs.cache
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.exe
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.pdb
+F:\C#\Курсовая работа\Hotel\Hotel\obj\Debug\Hotel.Form2.resources
