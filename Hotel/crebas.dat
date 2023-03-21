@@ -1,0 +1,320 @@
+/*==============================================================*/
+/* DBMS name:      Microsoft Access 2000 (Deprecated)           */
+/* Created on:     15.11.2022 17:42:34                          */
+/*==============================================================*/
+
+
+alter table Employees
+   drop constraint FK_EMPLOYEE_RELATIONS_POSITION;
+
+alter table ListOfServicesRendered
+   drop constraint FK_LISTOFSE_RELATIONS_EMPLOYEE;
+
+alter table ListOfServicesRendered
+   drop constraint FK_LISTOFSE_RELATIONS_SERVICES;
+
+alter table ListOfServicesRendered
+   drop constraint FK_LISTOFSE_RELATIONS_ÑLIENTS;
+
+alter table Orders
+   drop constraint FK_ORDERS_RELATIONS_LISTOFSE;
+
+alter table Orders
+   drop constraint FK_ORDERS_RELATIONS_EMPLOYEE;
+
+alter table Orders
+   drop constraint FK_ORDERS_RELATIONS_ÑLIENTS;
+
+alter table Orders
+   drop constraint FK_ORDERS_RELATIONS_ROOMS;
+
+alter table Rooms
+   drop constraint FK_ROOMS_RELATIONS_TYPEROOM;
+
+alter table Ñlients
+   drop constraint FK_ÑLIENTS_RELATIONS_TYPECLIE;
+
+drop index Relationship_3_FK on Employees;
+
+drop table Employees;
+
+drop index Relationship_10_FK on ListOfServicesRendered;
+
+drop index Relationship_9_FK on ListOfServicesRendered;
+
+drop index Relationship_4_FK on ListOfServicesRendered;
+
+drop table ListOfServicesRendered;
+
+drop index Relationship_8_FK on Orders;
+
+drop index Relationship_7_FK on Orders;
+
+drop index Relationship_6_FK on Orders;
+
+drop index Relationship_5_FK on Orders;
+
+drop table Orders;
+
+drop table Positions;
+
+drop index Relationship_1_FK on Rooms;
+
+drop table Rooms;
+
+drop table Services;
+
+drop table TypeClient;
+
+drop table TypeRooms;
+
+drop index Relationship_2_FK on Ñlients;
+
+drop table Ñlients;
+
+/*==============================================================*/
+/* Table: Employees                                             */
+/*==============================================================*/
+create table Employees
+(
+    ID_employee          NUMERIC(4)      not null,
+    ID_position          NUMERIC(4)      not null,
+    Emp_LastName         TEXT(256)       not null,
+    Emp_FirstName        TEXT(256)       not null,
+    Emp_Patronymic       TEXT(256),
+    Emp_FullName         TEXT(256)       not null,
+constraint PK_EMPLOYEES primary key (ID_employee)
+);
+
+/*==============================================================*/
+/* Index: Relationship_3_FK                                     */
+/*==============================================================*/
+create  index Relationship_3_FK on Employees
+(
+   ID_position          ASC
+);
+
+/*==============================================================*/
+/* Table: ListOfServicesRendered                                */
+/*==============================================================*/
+create table ListOfServicesRendered
+(
+    ID                   NUMERIC(4)      not null,
+    ID_client            NUMERIC(4)      not null,
+    ID_employee          NUMERIC(4)      not null,
+    ID_services          NUMERIC(4)      not null,
+    ID_list_of_services_rendered NUMERIC         not null,
+    DateOfService        DATE            not null,
+    reference_ID_client  NUMERIC         not null,
+    reference_ID_employee NUMERIC         not null,
+    reference_ID_services NUMERIC         not null,
+constraint PK_LISTOFSERVICESRENDERED primary key (ID)
+);
+
+/*==============================================================*/
+/* Index: Relationship_4_FK                                     */
+/*==============================================================*/
+create  index Relationship_4_FK on ListOfServicesRendered
+(
+   ID_services          ASC
+);
+
+/*==============================================================*/
+/* Index: Relationship_9_FK                                     */
+/*==============================================================*/
+create  index Relationship_9_FK on ListOfServicesRendered
+(
+   ID_client            ASC
+);
+
+/*==============================================================*/
+/* Index: Relationship_10_FK                                    */
+/*==============================================================*/
+create  index Relationship_10_FK on ListOfServicesRendered
+(
+   ID_employee          ASC
+);
+
+/*==============================================================*/
+/* Table: Orders                                                */
+/*==============================================================*/
+create table Orders
+(
+    ID_order             NUMERIC(4)      not null,
+    ID_room              NUMERIC(4)      not null,
+    ID_employee          NUMERIC(4)      not null,
+    ID_client            NUMERIC(4)      not null,
+    ID                   NUMERIC(4)      not null,
+    ArrivalDate          DATE            not null,
+    DepartureOfDate      DATE,
+    ref_ID_client        NUMERIC         not null,
+    ref_ID_employee      NUMERIC         not null,
+    ref_ID_room          NUMERIC         not null,
+    ref_ID_list_of_services_rendered NUMERIC         not null,
+constraint PK_ORDERS primary key (ID_order)
+);
+
+/*==============================================================*/
+/* Index: Relationship_5_FK                                     */
+/*==============================================================*/
+create  index Relationship_5_FK on Orders
+(
+   ID                   ASC
+);
+
+/*==============================================================*/
+/* Index: Relationship_6_FK                                     */
+/*==============================================================*/
+create  index Relationship_6_FK on Orders
+(
+   ID_employee          ASC
+);
+
+/*==============================================================*/
+/* Index: Relationship_7_FK                                     */
+/*==============================================================*/
+create  index Relationship_7_FK on Orders
+(
+   ID_client            ASC
+);
+
+/*==============================================================*/
+/* Index: Relationship_8_FK                                     */
+/*==============================================================*/
+create  index Relationship_8_FK on Orders
+(
+   ID_room              ASC
+);
+
+/*==============================================================*/
+/* Table: Positions                                             */
+/*==============================================================*/
+create table Positions
+(
+    ID_position          NUMERIC(4)      not null,
+    TitlePositions       TEXT(256)       not null,
+    Salary               CURRENCY(6)     not null,
+constraint PK_POSITIONS primary key (ID_position)
+);
+
+/*==============================================================*/
+/* Table: Rooms                                                 */
+/*==============================================================*/
+create table Rooms
+(
+    ID_room              NUMERIC(4)      not null,
+    ID_type_room         NUMERIC(4)      not null,
+    RoomNumber           NUMERIC(8)      not null,
+    RoomIsBusy           YESNO           not null,
+    CountRooms           NUMERIC(3)      not null,
+    ref_ID_type_room     NUMERIC(8)      not null,
+constraint PK_ROOMS primary key (ID_room)
+);
+
+/*==============================================================*/
+/* Index: Relationship_1_FK                                     */
+/*==============================================================*/
+create  index Relationship_1_FK on Rooms
+(
+   ID_type_room         ASC
+);
+
+/*==============================================================*/
+/* Table: Services                                              */
+/*==============================================================*/
+create table Services
+(
+    ID_services          NUMERIC(4)      not null,
+    NameService          TEXT(256)       not null,
+    ServiceCost          CURRENCY(4)     not null,
+constraint PK_SERVICES primary key (ID_services)
+);
+
+/*==============================================================*/
+/* Table: TypeClient                                            */
+/*==============================================================*/
+create table TypeClient
+(
+    ID_type_client       NUMERIC(4)      not null,
+    TitleType            TEXT(256)       not null,
+    MustPrepaid          YESNO           not null,
+constraint PK_TYPECLIENT primary key (ID_type_client)
+);
+
+/*==============================================================*/
+/* Table: TypeRooms                                             */
+/*==============================================================*/
+create table TypeRooms
+(
+    ID_type_room         NUMERIC(4)      not null,
+    RoomType             TEXT(256)       not null,
+    AdditionalInformation TEXT(256),
+constraint PK_TYPEROOMS primary key (ID_type_room)
+);
+
+/*==============================================================*/
+/* Table: Ñlients                                               */
+/*==============================================================*/
+create table Ñlients
+(
+    ID_client            NUMERIC(4)      not null,
+    ID_type_client       NUMERIC(4)      not null,
+    LastName             TEXT(256)       not null,
+    FirstName            TEXT(256)       not null,
+    Patronymic           TEXT(256),
+    FullName             TEXT(256)       not null,
+    DateOfBirth          DATE,
+    ref_ID_type_client   NUMERIC(8)      not null,
+    ApartmentNumber      NUMERIC(8)      not null,
+    PlaceOfResidence     TEXT(256)       not null,
+constraint PK_ÑLIENTS primary key (ID_client)
+);
+
+/*==============================================================*/
+/* Index: Relationship_2_FK                                     */
+/*==============================================================*/
+create  index Relationship_2_FK on Ñlients
+(
+   ID_type_client       ASC
+);
+
+alter table Employees
+   add constraint FK_EMPLOYEE_RELATIONS_POSITION foreign key (ID_position)
+      references Positions (ID_position);
+
+alter table ListOfServicesRendered
+   add constraint FK_LISTOFSE_RELATIONS_EMPLOYEE foreign key (ID_employee)
+      references Employees (ID_employee);
+
+alter table ListOfServicesRendered
+   add constraint FK_LISTOFSE_RELATIONS_SERVICES foreign key (ID_services)
+      references Services (ID_services);
+
+alter table ListOfServicesRendered
+   add constraint FK_LISTOFSE_RELATIONS_ÑLIENTS foreign key (ID_client)
+      references Ñlients (ID_client);
+
+alter table Orders
+   add constraint FK_ORDERS_RELATIONS_LISTOFSE foreign key (ID)
+      references ListOfServicesRendered (ID);
+
+alter table Orders
+   add constraint FK_ORDERS_RELATIONS_EMPLOYEE foreign key (ID_employee)
+      references Employees (ID_employee);
+
+alter table Orders
+   add constraint FK_ORDERS_RELATIONS_ÑLIENTS foreign key (ID_client)
+      references Ñlients (ID_client);
+
+alter table Orders
+   add constraint FK_ORDERS_RELATIONS_ROOMS foreign key (ID_room)
+      references Rooms (ID_room);
+
+alter table Rooms
+   add constraint FK_ROOMS_RELATIONS_TYPEROOM foreign key (ID_type_room)
+      references TypeRooms (ID_type_room);
+
+alter table Ñlients
+   add constraint FK_ÑLIENTS_RELATIONS_TYPECLIE foreign key (ID_type_client)
+      references TypeClient (ID_type_client);
+
